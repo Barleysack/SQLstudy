@@ -25,8 +25,9 @@ on u.userid = b.userID;
 GO
 
 SELECT * FROM v_userbuyInfo --할때마다 쿼리문 쓸 필요 없이 
---단순화하여 사용할 수 있다.
+--단순화하여 사용할 수 있다.뷰에 값을 바꿀 수 있으나 수정은 하지 마라...
+
 ORDER BY PRICE DESC
 
 
-
+/* Drop view v_usertbl 이걸로 지워진다. create/alter/drop 세가지.*/
