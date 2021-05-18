@@ -1,11 +1,12 @@
-CREATE or Alter PROC USP_ZODIAC
-	@username nvarchar(10)
-
+create or alter function ufn_getzodiac(@year int)
+returns nvarchar
 as
-	declare @byear int
+begin
+declare @byear int
+declare @username nvarchar(3)
 	declare @zodiac nvarchar(3)
 	select @byear = birthyear from usertbl
-	where name = @username
+	where name = @username 
 
 
 	set @zodiac =
@@ -23,12 +24,6 @@ as
 		when (@byear%12=10) then '말'
 		else '양'
 	end;
-print concat(@username,'의 띠는 ', @zodiac ,'입니다')
+	return @zodiac
+end
 go
-exec USP_ZODIAC '성시경'
-
---저장프로시저는 성능을 향상시키나 이제는 잘 안쓴다.
---모듈식 프로그래밍이 가능하다
---보안을 강화할 수 있다.
---네트워크 전송량을 감소.. 하지만 잊혀지는중
---일반 tsql의 두번째부터 빨라진다.
